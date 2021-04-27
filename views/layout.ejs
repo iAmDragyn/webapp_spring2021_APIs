@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Confetti Cuisine
+        </title>
+
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/confettiCuisine.js"></script>
+        <link rel="stylesheet" href="/css/bootstrap.css">  
+        <link rel="stylesheet" href="/css/confetti_cuisine.css"> 
+    </head>
+
+    <body>
+        <div id="nav">
+            <div class="col-sm nav-align">
+                <h1>
+                    Confetti Cuisine
+                </h1>
+            </div>
+            <div class="col-sm nav-align">
+                <a href="/">
+                    <span class="button">
+                        Home
+                    </span>
+                </a>
+                <a href="/courses">
+                    <span class="button">
+                        Courses
+                    </span>
+                </a>
+                <a href="/users">
+                    <span class="button">
+                        Users
+                    </span>
+                </a>
+                <a href="/subscribers">
+                    <span class="button">
+                        Subscribers
+                    </span>
+                </a>
+                <%- include('courses/_coursesModal') %>
+            </div>
+        </div>
+
+        <div class="login">
+            <% if(loggedIn) { %>
+                <p>
+                    Logged in as 
+                    <a href=" <%= `/users/${currentUser._id}` %>">
+                        <%= currentUser.firstName %>
+                    </a>
+                </p>
+                <a href="/users/logout">Log Out</a>
+            <% } else { %>
+            <a href="/users/login">Log In</a>
+            <% } %>  
+        </div>
+
+        <div class="flashes">
+            <% if(flashMessages) { %>
+                <% if(flashMessages.success) { %>
+                    <div class="flash-success">
+                        <%= flashMessages.success %>
+                    </div>
+                <% } else if(flashMessages.error) { %>
+                    <div class="flash-error">
+                        <%= flashMessages.error %>
+                    </div>
+                <% } %>
+            <% } %>
+        </div>
+
+        <%- body %>
+    </body>
+</html>
